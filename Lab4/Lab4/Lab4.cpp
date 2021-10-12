@@ -5,12 +5,18 @@ using namespace std;
 
 int my_atoi(const char* inputString) {
 	int result = 0;
-	while (*inputString != '\0') {
-		if (*inputString < '0' || *inputString > '9')
-			break;
+	for (int i = 0; inputString[i] != '\0'; i++) {
+		if (inputString[i] > '0' && inputString[i] < '9')
+			result = result * 10 + (inputString[i] - '0');
 		else
-			result = result * 10 + (*inputString++ - '0');
+			if (i == 0 && inputString[i] == '-')
+				result = result;
+			else
+				break;
+			
 	}
+	if (inputString[0] == '-')
+		result = -result;
 	return result;
 }
 
