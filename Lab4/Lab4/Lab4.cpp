@@ -13,7 +13,6 @@ int my_atoi(const char* inputString) {
 				result = result;
 			else
 				break;
-			
 	}
 	if (inputString[0] == '-')
 		result = -result;
@@ -44,6 +43,48 @@ int find_the_most_frequent_element(int firstSpace, int lastSpace, char* inputStr
 	}
 	return max_result;
 }
+int CountLetters(char* arary_for_string_TASK2, char input) {
+	int number_of_letters = 0;
+	for (int i = 0; arary_for_string_TASK2[i] != input; i++) {
+		if (arary_for_string_TASK2[i] == '.') {
+			break;
+		}
+		else {
+			number_of_letters++;
+		}
+	}
+	return number_of_letters;
+}
+
+void find_words(char input,char* arary_for_string_TASK2, vector<int>& first_space, vector<int>& last_space) {
+	first_space.push_back(0);
+	for (int i = 0; arary_for_string_TASK2[i] != input; i++) {
+		if (arary_for_string_TASK2[i] == ' ' || arary_for_string_TASK2[i] == '.') {
+			first_space.push_back(i);
+			last_space.push_back(i);
+		}
+	}
+	last_space.push_back(CountLetters(arary_for_string_TASK2, input));
+}
+
+void result(char* arary_for_string_TASK2, vector<int>& first_space, vector<int>& last_space) {
+	vector<int> result_vector;
+	for (int i = 0; i < last_space.size(); i++)
+		result_vector.push_back(find_the_most_frequent_element(first_space[i], last_space[i], arary_for_string_TASK2));
+	int result = INT_MIN, for_i = 0;
+	for (int i = 0; i < result_vector.size(); i++) {
+		if (result_vector[i] > result) {
+			result = result_vector[i];
+			for_i = i;
+		}
+	}
+	int for_the_first_spaces, for_the_last_spaces;
+	for_the_first_spaces = first_space[for_i];
+	for_the_last_spaces = last_space[for_i];
+	for (int i = for_the_first_spaces; i < for_the_last_spaces; i++)
+		cout << arary_for_string_TASK2[i];
+
+}
 
 int main() {
 	cout << "Enter the size of your stirng" << endl;
@@ -56,6 +97,8 @@ int main() {
 		cin >> arary_for_string_TASK1[i];
 	cout << "TASK 1" << endl << my_atoi(arary_for_string_TASK1) << endl;
 	const int max_size = 300;
+	vector<int>first_space;
+	vector<int>last_space;
 	char* arary_for_string_TASK2 = new char[max_size];
 	cout << "Enter some text" << endl;
 	char input = NULL;
@@ -63,41 +106,7 @@ int main() {
 		cin.get(input);
 		arary_for_string_TASK2[i] = input;
 	}
-	int number_of_letters = 0;
-	for (int i = 0; arary_for_string_TASK2[i] != input; i++) {
-		if (arary_for_string_TASK2[i] == '.') {
-			break;
-		}
-		else {
-			number_of_letters++;
-		}
-	}
-	number_of_letters++;
-	vector<int>arr_for_the_first_space;
-	vector<int>arr_for_the_last_space;
-	arr_for_the_first_space.push_back(0);
-	int last_space = 0, first_space = 0, g = 0;
-	for (int i = 0; arary_for_string_TASK2[i] != input; i++) {
-		if (arary_for_string_TASK2[i] == ' ' || arary_for_string_TASK2[i] == '.') {
-			arr_for_the_first_space.push_back(i);
-			arr_for_the_last_space.push_back(i);
-		}
-	}
-	arr_for_the_last_space.push_back(number_of_letters - 1);
-	vector<int> result_vector;
-	for (int i = 0; i < arr_for_the_last_space.size(); i++)
-		result_vector.push_back(find_the_most_frequent_element(arr_for_the_first_space[i], arr_for_the_last_space[i], arary_for_string_TASK2));
-	int result = INT_MIN, for_i = 0;
-	for (int i = 0; i < result_vector.size(); i++) {
-		if (result_vector[i] > result) {
-			result = result_vector[i];
-			for_i = i;
-		}
-	}
-	int for_the_first_spaces, for_the_last_spaces;
-	for_the_first_spaces = arr_for_the_first_space[for_i];
-	for_the_last_spaces = arr_for_the_last_space[for_i];
-	for (int i = for_the_first_spaces; i < for_the_last_spaces; i++)
-		cout << arary_for_string_TASK2[i];
+	find_words(input, arary_for_string_TASK2, first_space, last_space);
+	result(arary_for_string_TASK2, first_space, last_space);
 	return 0;
 }
