@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include "functions.h"
+#include "Tests.h"
 
 using namespace std;
 
@@ -43,6 +45,7 @@ int find_the_most_frequent_element(int firstSpace, int lastSpace, char* inputStr
 	}
 	return max_result;
 }
+
 int CountLetters(char* arary_for_string_TASK2, char input) {
 	int number_of_letters = 0;
 	for (int i = 0; arary_for_string_TASK2[i] != input; i++) {
@@ -108,5 +111,6 @@ int main() {
 	}
 	find_words(input, arary_for_string_TASK2, first_space, last_space);
 	result(arary_for_string_TASK2, first_space, last_space);
+	run_tests();
 	return 0;
 }
