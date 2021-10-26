@@ -61,7 +61,6 @@ void  test_CountLetters1() {
 	char test[8] = { 'a','a', 'a', 'a', 'a', ' ', '4', '.'
 	};
 	int result = CountLetters(test, NULL);
-	std::cout << result;
 	assert(result == 7);
 }
 
