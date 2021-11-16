@@ -96,7 +96,6 @@ for (int i = 0; i < last_space.size(); i++) {
 	for_the_last_spaces = last_space[for_i];
 	for (int i = for_the_first_spaces; i < for_the_last_spaces; i++)
 		cout << array_for_string_TASK2[i];
-
 }
 
 int main() {
